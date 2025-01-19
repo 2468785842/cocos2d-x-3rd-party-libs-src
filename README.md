@@ -114,7 +114,7 @@ The usage would be:
   arch:
     - use `all` to build all the supported architectures.
     - for iOS, they are "armv7, arm64, i386, x86_64"
-    - for Android, they are "arm,armv7,arm64,x86"
+    - for Android, they are "arm,armv7,arm64,x86,x86_64"
     - for Mac, they are "x86_64"
     - for Tizen, they are "armv7"
     - use comma separated arch name, for example, `armv7, arm64`, no space between the comma.
