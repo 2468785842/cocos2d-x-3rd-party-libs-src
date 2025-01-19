@@ -277,6 +277,8 @@ check_android_sdk()
         ## FIXME: the android toolchain path is hardcoded, only MACOSX will work.
         if [ ${ANDROID_ABI} = "x86" ]; then
             toolchain_path_prefix=x86
+        elif [ ${ANDROID_ABI} = "x86_64" ]; then
+            toolchain_path_prefix=x86_64
         elif [ ${ANDROID_ABI} = "arm64-v8a" ];then
             toolchain_path_prefix=aarch64-linux-android
         else
@@ -324,6 +326,13 @@ check_android_sdk()
         if [ ${ANDROID_ABI} = "x86" ];then
             add_make_enabled "HAVE_x86"
             add_make "EXTRA_CFLAGS := -ffunction-sections -funwind-tables -fstack-protector -no-canonical-prefixes  -fomit-frame-pointer -fstrict-aliasing -DANDROID -Wformat "
+        fi
+
+        if [ ${ANDROID_ABI} = "x86_64" ];then
+            add_make_enabled "HAVE_x86_64"
+
+            add_make "EXTRA_CFLAGS :=  -fpic -ffunction-sections  -funwind-tables  -fstack-protector  -no-canonical-prefixes"
+            add_make "EXTRA_LDFLAGS := -no-canonical-prefixes"
         fi
 
         if [ ${ANDROID_STL_VERSION} = "gnu" ];then

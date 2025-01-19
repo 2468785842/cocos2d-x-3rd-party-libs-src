@@ -1,5 +1,5 @@
 # OPENSSL
-OPENSSL_VERSION := 1.1.0c
+OPENSSL_VERSION := 1.1.1
 OPENSSL_URL := https://www.openssl.org/source/openssl-$(OPENSSL_VERSION).tar.gz
 
 OPENSSL_EXTRA_CONFIG_1=no-shared no-unit-test
@@ -137,12 +137,6 @@ $(TARBALLS)/openssl-$(OPENSSL_VERSION).tar.gz:
 
 openssl: openssl-$(OPENSSL_VERSION).tar.gz .sum-openssl
 	$(UNPACK)
-ifdef HAVE_ANDROID
-	$(APPLY) $(SRC)/openssl/android-clang.patch
-endif
-ifdef HAVE_IOS
-	$(APPLY) $(SRC)/openssl/ios-armv7-crash.patch
-endif
 	$(MOVE)
 
 .openssl: openssl

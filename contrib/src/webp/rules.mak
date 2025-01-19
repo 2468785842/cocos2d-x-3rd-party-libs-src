@@ -1,7 +1,7 @@
 # webp
 
-WEBP_VERSION := 0.5.0
-WEBP_URL := http://downloads.webmproject.org/releases/webp/libwebp-$(WEBP_VERSION).tar.gz
+WEBP_VERSION := 0.6.1
+WEBP_URL := https://github.com/webmproject/libwebp/archive/refs/tags/v$(WEBP_VERSION).tar.gz
 
 $(TARBALLS)/libwebp-$(WEBP_VERSION).tar.gz:
 	$(call download,$(WEBP_URL))
@@ -18,10 +18,10 @@ endif
 webp: libwebp-$(WEBP_VERSION).tar.gz .sum-webp
 	$(UNPACK)
 	$(UPDATE_AUTOCONFIG)
-	$(APPLY) $(SRC)/webp/missing-cpu-feature.patch
 	$(MOVE)
 
 .webp: webp
+	cd $< && ./autogen.sh
 	cd $< && $(HOSTVARS) ./configure $(HOSTCONF)
 	cd $< && $(MAKE)
 	cd $< && $(MAKE) install

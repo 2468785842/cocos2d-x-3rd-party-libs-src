@@ -15,7 +15,7 @@ glsl_optimizer: glsl-optimizer-git.tar.xz .sum-glslopt
 	$(MOVE)
 
 .glsl_optimizer: glsl_optimizer toolchain.cmake
-	cd $< && $(HOSTVARS) CXXFLAGS="$(CXXFLAGS) $(EX_ECFLAGS)" CFLAGS="$(CFLAGS) $(EX_ECFLAGS)" $(CMAKE) -DCMAKE_BUILD_TYPE=Release $(make_option) 
+	cd $< && $(HOSTVARS) CXXFLAGS="$(CXXFLAGS) $(EX_ECFLAGS) -std=c++11" CFLAGS="$(CFLAGS) $(EX_ECFLAGS)" $(CMAKE) -DCMAKE_BUILD_TYPE=Release $(make_option) 
 	cd $< && $(MAKE) -j 6
 	cd $< && $(MAKE) VERBOSE=1 install
 	touch $@

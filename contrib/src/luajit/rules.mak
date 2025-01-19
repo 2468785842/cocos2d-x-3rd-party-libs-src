@@ -1,7 +1,7 @@
 # luajit
 
 LUAJIT_VERSION := 2.1.0-beta3
-LUAJIT_URL := http://luajit.org/download/LuaJIT-$(LUAJIT_VERSION).tar.gz
+LUAJIT_URL := https://github.com/LuaJIT/LuaJIT/archive/refs/tags/v$(LUAJIT_VERSION).tar.gz
 
 $(TARBALLS)/LuaJIT-$(LUAJIT_VERSION).tar.gz:
 	$(call download,$(LUAJIT_URL))
@@ -71,7 +71,7 @@ endif
 
 .luajit: luajit
 ifdef HAVE_ANDROID
-	cd $< && $(MAKE) -j8 HOST_CC=$(LUAJIT_HOST_CC) CROSS=$(LUAJIT_CROSS_HOST) CC=clang TARGET_SYS=Linux TARGET_FLAGS=$(LUAJIT_TARGET_FLAGS)
+	cd $< && $(MAKE) -j8 HOST_CC=$(LUAJIT_HOST_CC) BUILDMODE=static LD=clang STRIP=llvm-strip CC=clang TARGET_SYS=Linux TARGET_FLAGS=$(LUAJIT_TARGET_FLAGS)
 endif
 
 ifdef HAVE_MACOSX
@@ -97,7 +97,7 @@ ifdef HAVE_IOS
 ifeq ($(MY_TARGET_ARCH),x86_64)
 	cd $< && CFLAGS="-DLUAJIT_ENABLE_GC64" LD_FLAGS="" $(MAKE) -j8
 else
-	cd $< && $(MAKE) -j8 HOST_CC=$(LUAJIT_HOST_CC) CROSS=$(LUAJIT_CROSS_HOST) TARGET_SYS=iOS  TARGET_FLAGS=$(LUAJIT_TARGET_FLAGS)
+	cd $< && $(MAKE) -j8 HOST_CC=$(LUAJIT_HOST_CC) TARGET_SYS=iOS  TARGET_FLAGS=$(LUAJIT_TARGET_FLAGS)
 endif
 
 endif

@@ -93,11 +93,11 @@ endif
 ifdef HAVE_ANDROID
 CC :=  clang
 CXX := clang++
-AR := $(HOST)-ar
+AR := llvm-ar
 AS := clang
-LD := $(HOST)-ld
-STRIP := $(HOST)-strip
-RANLIB := $(HOST)-gcc-ranlib
+LD := lld
+STRIP := llvm-strip
+RANLIB := llvm-ranlib
 EXTRA_CFLAGS += --sysroot=$(ANDROID_TOOLCHAIN_PATH)/sysroot
 endif
 
@@ -436,8 +436,7 @@ ifdef HAVE_ANDROID
 	echo "set(CMAKE_SYSTEM_NAME Linux)" >> $@
 	echo "set(CMAKE_CXX_SYSROOT_FLAG $(ANDROID_TOOLCHAIN_PATH)/sysroot)" >> $@
 	echo "set(CMAKE_C_SYSROOT_FLAG $(ANDROID_TOOLCHAIN_PATH)/sysroot)" >> $@
-	echo "include_directories($(ANDROID_TOOLCHAIN_PATH)/include/c++/4.9.x \
-	 	$(ANDROID_TOOLCHAIN_PATH)/include/llvm-libc++abi/include)"  >> $@
+	echo "include_directories($(ANDROID_TOOLCHAIN_PATH)/sysroot/usr/include/c++/v1)" >> $@
 endif  #end of HAVE_ANDROID
 
 ifdef HAVE_TIZEN
