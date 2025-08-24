@@ -15,6 +15,6 @@ chipmunk: Chipmunk-$(CHIPMUNK_VERSION).tgz .sum-chipmunk
 
 .chipmunk: chipmunk toolchain.cmake
 	$(APPLY) $(SRC)/chipmunk/cocos2d.patch
-	cd $< && $(HOSTVARS_PIC) $(CMAKE) . -DBUILD_DEMOS=off
+	cd $< && $(HOSTVARS_PIC) $(CMAKE) . -DBUILD_DEMOS=off -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 	cd $< && $(MAKE) VERBOSE=1 install
 	touch $@

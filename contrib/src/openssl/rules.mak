@@ -6,6 +6,15 @@ OPENSSL_EXTRA_CONFIG_1=no-shared no-unit-test
 OPENSSL_EXTRA_CONFIG_2=
 
 ifdef HAVE_MACOSX
+
+ifeq ($(MY_TARGET_ARCH),arm64)
+CUR_MAKEFILE_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+export OPENSSL_LOCAL_CONFIG_DIR=${CUR_MAKEFILE_DIR}/config
+
+OPENSSL_CONFIG_VARS=darwin64-arm64-cc
+OPENSSL_EXTRA_CONFIG_2=no-async
+endif
+
 ifeq ($(MY_TARGET_ARCH),x86_64)
 OPENSSL_CONFIG_VARS=darwin64-x86_64-cc
 OPENSSL_ARCH=-m64

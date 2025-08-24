@@ -243,9 +243,14 @@ function create_fat_library()
     echo "creating fat library for lib$copied_library_name.a"
     
     #strip & create fat library
-    LIPO="xcrun -sdk iphoneos lipo"
-    STRIP="xcrun -sdk iphoneos strip"
-
+    if [ "$cfg_platform_name" = "mac" ]; then
+        LIPO="xcrun -sdk macosx lipo"
+        STRIP="xcrun -sdk macosx strip"
+    else
+        LIPO="xcrun -sdk iphoneos lipo"
+        STRIP="xcrun -sdk iphoneos strip"
+    fi
+    
     fat_lib_path=$cfg_platform_name/$library_name/prebuilt/lib$copied_library_name.a
 
     if [ -f $fat_lib_path ]; then

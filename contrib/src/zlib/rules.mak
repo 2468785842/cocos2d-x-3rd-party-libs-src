@@ -7,6 +7,7 @@ ifeq ($(shell uname),Darwin) # zlib tries to use libtool on Darwin
 ifdef HAVE_CROSS_COMPILE
 ZLIB_CONFIG_VARS=CHOST=$(HOST)
 endif
+EX_ECFLAGS = -Dfdopen=fdopen
 endif
 
 ifdef HAVE_TIZEN

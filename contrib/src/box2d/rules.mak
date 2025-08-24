@@ -20,7 +20,7 @@ endif
 
 
 .box2d: box2d toolchain.cmake
-	cd $< &&  CXXFLAGS="$(CXXFLAGS) $(BOX2D_EXFLAGS) -std=c++11" CFLAGS="$(CFLAGS) $(BOX2D_EXFLAGS)" $(CMAKE)
+	cd $< && CXXFLAGS="$(CXXFLAGS) $(BOX2D_EXFLAGS) -std=c++11" CFLAGS="$(CFLAGS) $(BOX2D_EXFLAGS)" $(CMAKE) -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 	cd $< && $(MAKE)
 	cd $< && $(MAKE) VERBOSE=1 install
 	touch $@

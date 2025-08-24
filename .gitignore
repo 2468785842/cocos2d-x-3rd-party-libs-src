@@ -50,6 +50,7 @@
 /contrib/ios-i386/
 /contrib/ios-x86_64/
 /contrib/mac-x86_64/
+/contrib/mac-arm64/
 /contrib/src copy/
 **/winrt/install
 **/winrt/temp
